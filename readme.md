@@ -227,12 +227,6 @@ curl -X POST "http://localhost:8080/api/deals/batch" \
 # Run all tests
 mvn test
 
-# Run with coverage report
-mvn test jacoco:report
-
-# View coverage report
-open target/site/jacoco/index.html
-```
 
 **Test Coverage: 80%+**
 
@@ -394,7 +388,7 @@ mvn clean package -DskipTests
 
 ## GitHub Repository
 
-https://github.com/dohafettach/fx-deals-warehouse
+https://github.com/dohafettach/fx-deal-warehouse
 
 ---
 
