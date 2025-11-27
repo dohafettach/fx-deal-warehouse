@@ -8,15 +8,15 @@ This system accepts FX deal details and persists them into a PostgreSQL database
 
 ## Features
 
--  Import single FX deals
--  Batch import multiple deals with partial success support
--  Duplicate deal detection (no duplicate imports)
--  ISO currency code validation
--  Comprehensive error handling and logging
--  No rollback policy - successfully imported deals are always saved
--  RESTful API with proper HTTP status codes
--  Dockerized deployment with PostgreSQL
--  80%+ unit test coverage
+- Import single FX deals
+- Batch import multiple deals with partial success support
+- Duplicate deal detection (no duplicate imports)
+- ISO currency code validation
+- Comprehensive error handling and logging
+- No rollback policy - successfully imported deals are always saved
+- RESTful API with proper HTTP status codes
+- Dockerized deployment with PostgreSQL
+- 80%+ unit test coverage
 
 ## Technologies Used
 
@@ -42,9 +42,6 @@ git clone https://github.com/dohafettach/fx-deals-warehouse.git
 cd fx-deals-warehouse
 
 # Build and run everything
-make run
-
-# Or manually
 docker-compose up --build
 ```
 
@@ -60,6 +57,7 @@ http://localhost:8080/api/deals
 ### Endpoints
 
 #### 1. Import Single Deal
+
 **POST** `/api/deals`
 
 **Request Body:**
@@ -97,6 +95,7 @@ http://localhost:8080/api/deals
 ```
 
 #### 2. Import Batch Deals
+
 **POST** `/api/deals/batch`
 
 **Request Body:**
@@ -127,7 +126,7 @@ http://localhost:8080/api/deals
   "totalRequested": 2,
   "successCount": 2,
   "failureCount": 0,
-  "successfulDeals": [],
+  "successfulDeals": [...],
   "failedDeals": []
 }
 ```
@@ -138,7 +137,7 @@ http://localhost:8080/api/deals
   "totalRequested": 3,
   "successCount": 2,
   "failureCount": 1,
-  "successfulDeals": [],
+  "successfulDeals": [...],
   "failedDeals": [
     {
       "dealId": "DEAL002",
@@ -150,6 +149,7 @@ http://localhost:8080/api/deals
 ```
 
 #### 3. Get All Deals
+
 **GET** `/api/deals`
 
 **Response (200 OK):**
@@ -166,28 +166,40 @@ http://localhost:8080/api/deals
 ]
 ```
 
-## Testing with Sample Data
+## Testing the API
 
-A sample data file is provided in `sample-deals.json`. Test the batch import:
-
-### Using PowerShell:
+### Using PowerShell (Windows):
 ```powershell
-# Load the JSON file
-$body = Get-Content -Raw -Path "sample-deals.json"
+# Import a single deal
+$deal = @{
+    dealId = "DEAL001"
+    fromCurrency = "USD"
+    toCurrency = "EUR"
+    dealTimestamp = "2025-11-26T10:30:00"
+    dealAmount = 1000.50
+} | ConvertTo-Json
 
-# Send the batch import request
-Invoke-RestMethod `
-  -Uri "http://localhost:8080/api/deals/batch" `
-  -Method POST `
-  -Body $body `
-  -ContentType "application/json"
+Invoke-RestMethod -Uri "http://localhost:8080/api/deals" -Method Post -Body $deal -ContentType "application/json"
 
-### Using curl (bash):
+# Get all deals
+Invoke-RestMethod -Uri "http://localhost:8080/api/deals" -Method Get
+```
+
+### Using curl (Git Bash / Linux / Mac):
 ```bash
-curl -X POST "http://localhost:8080/api/deals/batch" \
+# Import a single deal
+curl -X POST http://localhost:8080/api/deals \
   -H "Content-Type: application/json" \
-  --data "@sample-deals.json"
+  -d '{
+    "dealId": "DEAL001",
+    "fromCurrency": "USD",
+    "toCurrency": "EUR",
+    "dealTimestamp": "2025-11-26T10:30:00",
+    "dealAmount": 1000.50
+  }'
 
+# Get all deals
+curl http://localhost:8080/api/deals
 ```
 
 ## Validation Rules
@@ -208,7 +220,7 @@ curl -X POST "http://localhost:8080/api/deals/batch" \
 ```bash
 # Run all tests
 mvn test
-
+```
 
 **Test Coverage: 80%+**
 
@@ -219,9 +231,9 @@ fx-deals-warehouse/
 │   ├── main/
 │   │   ├── java/bloomberg/fxdealswarehouse/
 │   │   │   ├── controller/       # REST endpoints
-            ├── dto/              # Request/response objects
-            ├── entity/           # JPA entities
-            ├── exception/        # Custom exceptions
+│   │   │   ├── dto/              # Request/response objects
+│   │   │   ├── entity/           # JPA entities
+│   │   │   ├── exception/        # Custom exceptions
 │   │   │   ├── repository/       # Database access
 │   │   │   └── service/          # Business logic
 │   │   └── resources/
@@ -235,7 +247,7 @@ fx-deals-warehouse/
 ├── Dockerfile
 ├── Makefile
 ├── pom.xml
-├── readme.md
+├── README.md
 └── sample-deals.json
 ```
 
@@ -368,6 +380,8 @@ mvn clean package -DskipTests
 - Add deal search and filtering
 - Implement comprehensive security measures
 
+---
+
 **Developed by:** Doha Fettach  
 **Assignment for:** ProgressSoft Corporation  
-**Date:** November 27th 2025
+**Date:** November 27, 2025
