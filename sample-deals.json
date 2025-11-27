@@ -1,0 +1,39 @@
+{
+  "deals": [
+    {
+      "dealId": "DEAL001",
+      "fromCurrency": "USD",
+      "toCurrency": "EUR",
+      "dealTimestamp": "2025-11-26T10:30:00",
+      "dealAmount": 1000.50
+    },
+    {
+      "dealId": "DEAL002",
+      "fromCurrency": "MAD",
+      "toCurrency": "USD",
+      "dealTimestamp": "2025-11-26T11:00:00",
+      "dealAmount": 5000.00
+    },
+    {
+      "dealId": "DEAL003",
+      "fromCurrency": "EUR",
+      "toCurrency": "CHF",
+      "dealTimestamp": "2025-11-26T11:30:00",
+      "dealAmount": 2500.75
+    },
+    {
+      "dealId": "DEAL004",
+      "fromCurrency": "AUD",
+      "toCurrency": "USD",
+      "dealTimestamp": "2025-11-26T12:00:00",
+      "dealAmount": 7500.25
+    },
+    {
+      "dealId": "DEAL005",
+      "fromCurrency": "CAD",
+      "toCurrency": "MAD",
+      "dealTimestamp": "2025-11-26T12:30:00",
+      "dealAmount": 3200.00
+    }
+  ]
+}
