@@ -50,24 +50,6 @@ docker-compose up --build
 
 The application will be available at `http://localhost:8080`
 
-### Using Makefile
-```bash
-# Build the project
-make build
-
-# Run tests
-make test
-
-# Run application with Docker
-make run
-
-# Stop application
-make stop
-
-# Clean everything
-make clean
-```
-
 ## API Documentation
 
 ### Base URL
@@ -385,12 +367,6 @@ mvn clean package -DskipTests
 - Implement deal update/delete operations
 - Add deal search and filtering
 - Implement comprehensive security measures
-
-## GitHub Repository
-
-https://github.com/dohafettach/fx-deal-warehouse
-
----
 
 **Developed by:** Doha Fettach  
 **Assignment for:** ProgressSoft Corporation  
